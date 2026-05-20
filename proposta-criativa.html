@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta · A Criativa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --preto: #0b0b0a;
+  --areia: #d0bdad;
+  --marfim: #e9e9e9;
+  --azul: #67869b;
+  --azul-claro: #8aa5b8;
+  --cinza-escuro: #555;
+  --fundo2: #111110;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--preto);
+  color: var(--areia);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 1.4rem 7vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(11,11,10,0.96) 70%, transparent);
+}
+
+.nav-logo {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.35em;
+  color: var(--marfim);
+  text-transform: uppercase;
+}
+
+.nav-logo span {
+  color: var(--azul);
+}
+
+.nav-tag {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--areia);
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8rem 7vw 7rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(208,189,173,0.1);
+}
+
+.hero-glow {
+  position: absolute;
+  top: 0; right: -5vw;
+  width: 55vw; height: 70vh;
+  background: radial-gradient(ellipse at top right, rgba(103,134,155,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-glow2 {
+  position: absolute;
+  bottom: 10vh; left: -5vw;
+  width: 40vw; height: 40vh;
+  background: radial-gradient(ellipse at bottom left, rgba(208,189,173,0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-kicker {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--azul);
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.3s;
+}
+
+.hero-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 9vw, 7.8rem);
+  font-weight: 300;
+  line-height: 1.04;
+  color: var(--marfim);
+  max-width: 860px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards 0.5s;
+}
+
+.hero-titulo em {
+  font-style: italic;
+  color: var(--areia);
+}
+
+.hero-sub {
+  margin-top: 2.5rem;
+  font-size: 1rem;
+  color: rgba(208,189,173,0.65);
+  max-width: 460px;
+  line-height: 1.85;
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards 0.8s;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 7vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 1.3s;
+}
+
+.hero-scroll-hint span {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(208,189,173,0.3);
+  writing-mode: vertical-rl;
+}
+
+.hero-scroll-hint::after {
+  content: '';
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, rgba(208,189,173,0.25), transparent);
+}
+
+/* SEÇÃO BASE */
+section { padding: 90px 7vw; }
+
+.label {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--azul);
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.label::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--azul);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* DOR */
+.s-dor {
+  background: var(--preto);
+  border-top: 1px solid rgba(208,189,173,0.08);
+}
+
+.dor-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.9rem, 4.2vw, 3.6rem);
+  font-weight: 300;
+  color: var(--marfim);
+  max-width: 680px;
+  line-height: 1.2;
+  margin-bottom: 4rem;
+}
+
+.dor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(208,189,173,0.07);
+  border: 1px solid rgba(208,189,173,0.07);
+}
+
+.dor-card {
+  background: var(--preto);
+  padding: 2.5rem 2rem;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.dor-card:hover { background: rgba(103,134,155,0.05); }
+
+.dor-card::before {
+  content: '\201C';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  color: rgba(208,189,173,0.07);
+  position: absolute;
+  top: 0.4rem;
+  left: 1.5rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.dor-frase {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(208,189,173,0.8);
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* NÃO SOMOS */
+.s-nao {
+  background: var(--fundo2);
+  border-top: 1px solid rgba(208,189,173,0.08);
+}
+
+.s-nao .inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+}
+
+.s-nao h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.9rem);
+  font-weight: 300;
+  color: var(--marfim);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.s-nao p {
+  color: rgba(208,189,173,0.65);
+  font-size: 0.93rem;
+  line-height: 1.85;
+  margin-bottom: 1rem;
+}
+
+.citacao {
+  border-left: 1px solid var(--azul);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+.citacao p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--areia) !important;
+  line-height: 1.6;
+  margin: 0 !important;
+}
+
+/* METODOLOGIA */
+.s-metodo {
+  background: var(--preto);
+  border-top: 1px solid rgba(208,189,173,0.08);
+}
+
+.s-metodo h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.9rem);
+  font-weight: 300;
+  color: var(--marfim);
+  line-height: 1.2;
+  margin-bottom: 4rem;
+  max-width: 520px;
+}
+
+.metodo-item {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(208,189,173,0.07);
+  align-items: start;
+}
+
+.metodo-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: rgba(103,134,155,0.2);
+  line-height: 1;
+}
+
+.metodo-conteudo h3 {
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--azul-claro);
+  margin-bottom: 0.7rem;
+}
+
+.metodo-conteudo p {
+  color: rgba(208,189,173,0.6);
+  font-size: 0.9rem;
+  line-height: 1.85;
+}
+
+/* RESULTADO */
+.s-resultado {
+  background: var(--fundo2);
+  border-top: 1px solid rgba(208,189,173,0.08);
+}
+
+.s-resultado h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.9rem);
+  font-weight: 300;
+  color: var(--marfim);
+  line-height: 1.2;
+  margin-bottom: 4rem;
+  max-width: 500px;
+}
+
+.resultado-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(208,189,173,0.06);
+}
+
+.resultado-card {
+  background: var(--fundo2);
+  padding: 2.5rem 2rem;
+  border-top: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.resultado-card:hover { border-top-color: var(--azul); }
+
+.resultado-linha {
+  width: 28px;
+  height: 1px;
+  background: var(--azul);
+  margin-bottom: 1.75rem;
+}
+
+.resultado-card h3 {
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--marfim);
+  margin-bottom: 0.75rem;
+}
+
+.resultado-card p {
+  color: rgba(208,189,173,0.6);
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+
+/* PASSOS */
+.s-passos {
+  background: var(--preto);
+  border-top: 1px solid rgba(208,189,173,0.08);
+}
+
+.s-passos h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.9rem);
+  font-weight: 300;
+  color: var(--marfim);
+  line-height: 1.2;
+  margin-bottom: 4rem;
+  max-width: 500px;
+}
+
+.passo-item {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(208,189,173,0.07);
+  align-items: center;
+}
+
+.passo-circulo {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(103,134,155,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--azul-claro);
+  flex-shrink: 0;
+}
+
+.passo-body {
+  display: flex;
+  align-items: baseline;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.passo-body h3 {
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--marfim);
+  min-width: 130px;
+}
+
+.passo-body p {
+  color: rgba(208,189,173,0.55);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+/* CTA */
+.s-cta {
+  background: var(--areia);
+  padding: 110px 7vw;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.s-cta::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(11,11,10,0.04);
+  pointer-events: none;
+}
+
+.cta-logo {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  color: rgba(11,11,10,0.4);
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+
+.s-cta h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5.8vw, 4.8rem);
+  font-weight: 300;
+  color: var(--preto);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.s-cta h2 em {
+  font-style: italic;
+  color: #3d5261;
+}
+
+.s-cta p {
+  color: rgba(11,11,10,0.55);
+  font-size: 0.95rem;
+  max-width: 430px;
+  margin: 0 auto 3rem;
+  line-height: 1.85;
+}
+
+.btn-cta {
+  display: inline-block;
+  padding: 1rem 3.2rem;
+  background: var(--preto);
+  color: var(--areia);
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn-cta:hover {
+  background: var(--azul);
+  color: var(--marfim);
+}
+
+/* RODAPÉ */
+footer {
+  background: var(--preto);
+  padding: 2.2rem 7vw;
+  border-top: 1px solid rgba(208,189,173,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-logo {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: rgba(208,189,173,0.4);
+  text-transform: uppercase;
+}
+
+footer span {
+  font-size: 0.68rem;
+  color: rgba(208,189,173,0.25);
+  letter-spacing: 0.1em;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.vis { opacity: 1; transform: none; }
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .dor-grid { grid-template-columns: repeat(2, 1fr); }
+  .resultado-grid { grid-template-columns: repeat(2, 1fr); }
+  .s-nao .inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+@media (max-width: 600px) {
+  .dor-grid { grid-template-columns: 1fr; }
+  .resultado-grid { grid-template-columns: 1fr; }
+  .passo-body { flex-direction: column; gap: 0.4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">CR<span>I</span>ATIVA</div>
+
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <h1 class="hero-titulo">
+    Sua empresa<br>
+    funciona<br>
+    <em>sem você?</em>
+  </h1>
+  <p class="hero-sub">
+    Se a resposta demorou para vir, ou se você já sabe que não, esse documento é para você.
+  </p>
+  <div class="hero-scroll-hint"><span>scroll</span></div>
+</section>
+
+<!-- DOR -->
+<section class="s-dor">
+  <p class="label reveal">O que você está vivendo</p>
+  <h2 class="dor-titulo reveal">
+    Você não está cansado de marketing.<br>
+    Você está cansado de marketing<br>que não funciona.
+  </h2>
+  <div class="dor-grid reveal">
+    <div class="dor-card">
+      <p class="dor-frase">&ldquo;A gente produz muito, mas não vejo retorno claro.&rdquo;</p>
+    </div>
+    <div class="dor-card">
+      <p class="dor-frase">&ldquo;Já contratei agência, influencer e nada virou cliente de verdade.&rdquo;</p>
+    </div>
+    <div class="dor-card">
+      <p class="dor-frase">&ldquo;Tenho medo de postar errado e ferrar a reputação que levei anos para construir.&rdquo;</p>
+    </div>
+    <div class="dor-card">
+      <p class="dor-frase">&ldquo;Se eu não revisar tudo, a qualidade cai.&rdquo;</p>
+    </div>
+    <div class="dor-card">
+      <p class="dor-frase">&ldquo;O time está sobrecarregado e eu também.&rdquo;</p>
+    </div>
+    <div class="dor-card">
+      <p class="dor-frase">&ldquo;Todo mês é uma surpresa no caixa.&rdquo;</p>
+    </div>
+  </div>
+</section>
+
+<!-- NÃO SOMOS -->
+<section class="s-nao">
+  <div class="inner">
+    <div class="reveal">
+      <p class="label">O que não somos</p>
+      <h2>Não somos uma agência.</h2>
+      <p>Agências entregam posts. Nós entregamos infraestrutura de marca: o sistema que faz o marketing funcionar mesmo quando você não está olhando.</p>
+      <p>Não fazemos conteúdo por obrigação. Não geramos volume sem intenção. Não sumimos depois do contrato assinado.</p>
+      <div class="citacao">
+        <p>Tratamos sua marca como um organismo vivo. Cada decisão reforça sua autoridade e prepara o terreno para resultados concretos.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="label">O que entregamos</p>
+      <h2>Estratégia que pensa como negócio.</h2>
+      <p>Enquanto o mercado entrega calendário editorial, nós entregamos um planejamento estratégico com objetivo, canal, métrica e intenção em cada ação.</p>
+      <p>Enquanto outros fazem visual bonito com copy vazia, nós saímos do genérico com ideias que têm diferencial real.</p>
+      <div class="citacao">
+        <p>Conteúdo sem estratégia é barulho com estética.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGIA -->
+<section class="s-metodo">
+  <p class="label reveal">Nossa metodologia</p>
+  <h2 class="reveal">O fundamento que o<br>seu negócio precisa.</h2>
+
+  <div class="metodo-item reveal">
+    <div class="metodo-num">01</div>
+    <div class="metodo-conteudo">
+      <h3>Diagnóstico de Marca e Mercado</h3>
+      <p>Análise profunda do negócio: quem você é, o que vende, para quem vende, como se diferencia. Mapeamos dores e desejos do cliente ideal, analisamos concorrentes e identificamos oportunidades não aproveitadas. Entregamos: Análise SWOT, mapeamento de concorrentes e perfil do cliente ideal.</p>
+    </div>
+  </div>
+  <div class="metodo-item reveal">
+    <div class="metodo-num">02</div>
+    <div class="metodo-conteudo">
+      <h3>Definição de Canais e Presença Digital</h3>
+      <p>Não adianta estar em todo lugar sem resultado. A estratégia define quais canais fazem sentido para o tipo de negócio, o público e o momento da empresa. Presença com intenção, não por obrigação.</p>
+    </div>
+  </div>
+  <div class="metodo-item reveal">
+    <div class="metodo-num">03</div>
+    <div class="metodo-conteudo">
+      <h3>Identidade Verbal da Marca</h3>
+      <p>Como a sua marca fala, qual o tom de voz, quais palavras usa e quais evita. Uma marca com identidade verbal clara cria reconhecimento, gera confiança e vende mais, porque parece consistente em todos os pontos de contato.</p>
+    </div>
+  </div>
+  <div class="metodo-item reveal">
+    <div class="metodo-num">04</div>
+    <div class="metodo-conteudo">
+      <h3>Estratégia de Conteúdo Completa</h3>
+      <p>Os pilares que sustentam a comunicação, os formatos adequados para cada canal e a lógica por trás de cada tipo de conteúdo: o que atrai, o que educa, o que converte.</p>
+    </div>
+  </div>
+  <div class="metodo-item reveal">
+    <div class="metodo-num">05</div>
+    <div class="metodo-conteudo">
+      <h3>Calendário Editorial</h3>
+      <p>Um calendário completo e pronto para executar — com temas, formatos, objetivos e datas definidos. Não é lista de pautas: é um plano com intenção para cada publicação.</p>
+    </div>
+  </div>
+  <div class="metodo-item reveal">
+    <div class="metodo-num">06</div>
+    <div class="metodo-conteudo">
+      <h3>Apresentação Estratégica</h3>
+      <p>Todo o planejamento é apresentado para que você entenda não só o que fazer, mas o porquê de cada decisão. Inclui documento em PDF, reunião de 1h ao vivo e espaço para ajustes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADO -->
+<section class="s-resultado">
+  <p class="label reveal">O que muda para o seu negócio</p>
+  <h2 class="reveal">Resultado em linguagem<br>de negócio.</h2>
+  <div class="resultado-grid reveal">
+    <div class="resultado-card">
+      <div class="resultado-linha"></div>
+      <h3>Menos retrabalho</h3>
+      <p>Com um sistema claro, você para de improvisar conteúdo e começa a executar com consistência, sem depender da sua presença em cada decisão.</p>
+    </div>
+    <div class="resultado-card">
+      <div class="resultado-linha"></div>
+      <h3>Reputação protegida</h3>
+      <p>Cada ponto de contato da sua marca reforça a autoridade que você levou anos para construir. Nada é publicado por acidente ou por obrigação.</p>
+    </div>
+    <div class="resultado-card">
+      <div class="resultado-linha"></div>
+      <h3>Conteúdo com propósito</h3>
+      <p>Cada publicação tem um objetivo claro: atrair o cliente certo, construir autoridade e preparar o terreno para o negócio crescer com consistência.</p>
+    </div>
+    <div class="resultado-card">
+      <div class="resultado-linha"></div>
+      <h3>Clareza para o time</h3>
+      <p>Com a estratégia documentada, seu time executa sem precisar de você como filtro de qualidade. A marca fica consistente sem sua presença constante.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PASSOS -->
+<section class="s-passos">
+  <p class="label reveal">O que acontece depois do "sim"</p>
+  <h2 class="reveal">Cinco etapas.<br>Um resultado claro.</h2>
+  <div class="reveal">
+    <div class="passo-item">
+      <div class="passo-circulo">1</div>
+      <div class="passo-body">
+        <h3>Briefing</h3>
+        <p>Reunião inicial para entender o negócio, os objetivos e os desafios atuais.</p>
+      </div>
+    </div>
+    <div class="passo-item">
+      <div class="passo-circulo">2</div>
+      <div class="passo-body">
+        <h3>Pesquisa</h3>
+        <p>Estudo do negócio, concorrentes, mercado e público-alvo.</p>
+      </div>
+    </div>
+    <div class="passo-item">
+      <div class="passo-circulo">3</div>
+      <div class="passo-body">
+        <h3>Planejamento</h3>
+        <p>Definição de pilares estratégicos, tom de voz e diretrizes do ecossistema de marca.</p>
+      </div>
+    </div>
+    <div class="passo-item">
+      <div class="passo-circulo">4</div>
+      <div class="passo-body">
+        <h3>Apresentação</h3>
+        <p>Reunião ao vivo para apresentar a estratégia completa com espaço para ajustes.</p>
+      </div>
+    </div>
+    <div class="passo-item">
+      <div class="passo-circulo">5</div>
+      <div class="passo-body">
+        <h3>Execução</h3>
+        <p>A estratégia é aplicada em ativos reais, onde tudo que foi planejado vira resultado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="s-cta">
+  <div class="cta-logo">CR&thinsp;I&thinsp;A&thinsp;T&thinsp;I&thinsp;V&thinsp;A</div>
+  <h2>Pronto para<br>sair do <em>genérico?</em></h2>
+  <p>Não precisa ter tudo resolvido para começar. Precisa só entender que o que está sendo feito até agora não é suficiente.</p>
+  <a class="btn-cta" href="https://wa.me/5534997890476" target="_blank">Vamos conversar</a>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+  <div class="footer-logo">CR&thinsp;I&thinsp;A&thinsp;T&thinsp;I&thinsp;V&thinsp;A</div>
+  <span>© 2026 · Aline Freitas · Estrategista Digital</span>
+</footer>
+
+<script>
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('vis');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+</body>
+</html>
